@@ -3,13 +3,19 @@ from polinomio import Polinomio
 def ingresar(polinomio :Polinomio):
     while True:
         coeficiente = "a"
-        while not coeficiente.isnumeric():
+        while not coeficiente.removeprefix("-").isnumeric():
             print("# Para salir")
             coeficiente = input("Coeficiente: ")
             if coeficiente.strip() == "#":
                 return
         polinomio.insert_head(int(coeficiente))
 
+def evaluar(polinomio:Polinomio):
+    valor = "a"
+    while not valor.replace(".","").isnumeric():
+        print("Ingrese un valor de numerico")
+        valor = input()
+    return polinomio.evaluar(float(valor))
 
 if __name__ == "__main__":
     a = Polinomio()
@@ -23,7 +29,7 @@ if __name__ == "__main__":
             "1. Ingresar componente\n" +
             "2. Operar polinomios\n" +
             "3. Evaluar polinomio\n" +
-            "S. Salir"
+            "s. Salir"
         )
         opcion = input("Ingrese la opcion a realizar: ")
         match opcion:
@@ -44,8 +50,19 @@ if __name__ == "__main__":
             case "2":
                 pass
             case "3":
-                pass
-            case "S":
+                print(
+                    "Seleccione el polinomio\n"+
+                    f"A. {a}\n"+
+                    f"B. {b}"
+                )
+                poli = input().upper()
+                if poli == "A":
+                    print(evaluar(a))
+                elif poli == "B":
+                    print(evaluar(b))
+                else:
+                    print("Polinomio desconocido, vuevla a intentar")
+            case "s":
                 break
             case _:
                 print("Opcion no reconocida")
