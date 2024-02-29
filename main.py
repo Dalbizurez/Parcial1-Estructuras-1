@@ -17,6 +17,23 @@ def evaluar(polinomio:Polinomio):
         valor = input()
     return polinomio.evaluar(float(valor))
 
+def operar(a:Polinomio, b:Polinomio, operacion):
+    c = Polinomio()
+    nodea = a.head
+    nodeb = b.head
+
+    for x in range(0, a.length):
+        valor = nodea.data
+        if x <= b.length:
+            if b.head:
+                valor += operacion * nodeb.data
+        c.insert_head(valor)
+
+        nodea = nodea.next
+        if b.head:
+            nodeb = nodeb.next
+    return c
+
 if __name__ == "__main__":
     a = Polinomio()
     b = Polinomio()
@@ -48,7 +65,22 @@ if __name__ == "__main__":
                 else:
                     print("Polinomio desconocido, vuevla a intentar")
             case "2":
-                pass
+                print(
+                    "Adicion o sustraccion\n"+
+                    "1. +\n"+
+                    "2. -"
+                )
+                operacion = input()
+                match operacion:
+                    case "1":
+                        operacion = 1
+                    case "2":
+                        operacion = -1
+                    case _:
+                        print("Operacion no reconocida")
+                        continue
+
+                print(f"c = {operar(a, b, operacion)}")
             case "3":
                 print(
                     "Seleccione el polinomio\n"+
