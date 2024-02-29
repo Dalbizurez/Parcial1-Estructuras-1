@@ -21,13 +21,15 @@ def operar(a:Polinomio, b:Polinomio, operacion):
     c = Polinomio()
     nodea = a.head
     nodeb = b.head
+    if a.length != b.length:
+        return "Operacion no compatible, diferente grado de polinomios"
 
     for x in range(0, a.length):
         valor = nodea.data
         if x <= b.length:
             if b.head:
                 valor += operacion * nodeb.data
-        c.insert_head(valor)
+        c.add(valor)
 
         nodea = nodea.next
         if b.head:

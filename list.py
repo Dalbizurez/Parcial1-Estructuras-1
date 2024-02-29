@@ -15,3 +15,14 @@ class LinkedList:
             self.head = Node(data)
             self.head.next = old
             self.length += 1
+    
+    def add(self, data):
+        if self.head:
+            nodo = self.head
+            while nodo.next:
+                nodo = nodo.next
+            
+            nodo.next = Node(data)
+        else:
+            self.head = Node(data)
+        self.length += 1
